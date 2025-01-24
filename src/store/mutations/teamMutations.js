@@ -27,14 +27,14 @@ export const teamMutations = {
     state.players = [...state.players, player]
   },
   [types.GET_PLAYERS_BY_TEAMID](state, players) {
-    state.players = [...players]
+    state.players = players
     let index = state.myTeams.findIndex((item) => item.id == players[0].teamId)
     if (index >= 0) {
-      state.myTeams[index].players = [...players]
+      state.myTeams[index].players = players
     }
     let index2 = state.teams.findIndex((item) => item.id == players[0].teamId)
     if (index2 >= 0) {
-      state.players[index2] = [...players]
+      state.teams[index2].players = players
     }
   },
   [types.UPDATE_PLAYER](state, player) {

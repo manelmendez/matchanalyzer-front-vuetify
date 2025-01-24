@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-if="show" :model-value="show" max-width="500" persistent>
     <v-card>
-      <v-card-title class="text-h5" :value="title">{{ title }}</v-card-title>
+      <v-toolbar color="primary">
+        <v-toolbar-title>{{ title }}</v-toolbar-title>
+      </v-toolbar>
       <v-card-text>{{ text }}</v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>

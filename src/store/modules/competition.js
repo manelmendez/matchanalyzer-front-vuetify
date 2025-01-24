@@ -68,20 +68,20 @@ export const competitionModule = {
       )
     },
     minutesByMatchpart: (state) => (matchpartId) => {
-      return state.minutes.filter((minute) => minute.matchpart == matchpartId)
+      return state.minutes.filter((minute) => minute.matchpartId == matchpartId)
     },
     goalsByMatchpart: (state) => (matchpartId) => {
-      return state.goals.filter((goal) => goal.matchpart == matchpartId)
+      return state.goals.filter((goal) => goal.matchpartId == matchpartId)
     },
     assistsByMatchpart: (state) => (matchpartId) => {
-      return state.assists.filter((assist) => assist.matchpart == matchpartId)
+      return state.assists.filter((assist) => assist.matchpartId == matchpartId)
     },
     cardsByMatchpart: (state) => (matchpartId) => {
-      return state.cards.filter((card) => card.matchpart == matchpartId)
+      return state.cards.filter((card) => card.matchpartId == matchpartId)
     },
     substitutionsByMatchpart: (state) => (matchpartId) => {
       return state.substitutions.filter(
-        (substitution) => substitution.matchpart == matchpartId
+        (substitution) => substitution.matchpartId == matchpartId
       )
     },
     teamById: (state) => (teamId) => {
@@ -118,9 +118,9 @@ export const competitionModule = {
           while (j < actualRound.matches.length && !found) {
             if (
               actualCompetition.teams[i].id ==
-                actualRound.matches[j].localTeam.id ||
+              actualRound.matches[j].localTeam.id ||
               actualCompetition.teams[i].id ==
-                actualRound.matches[j].awayTeam.id
+              actualRound.matches[j].awayTeam.id
             ) {
               found = true
               let index = actualRoundTeams
@@ -310,7 +310,7 @@ export const competitionModule = {
               if (
                 duelMatches[z].localTeam.id == a.id &&
                 Number(duelMatches[z].localTeamGoals) >
-                  Number(duelMatches[z].awayTeamGoals)
+                Number(duelMatches[z].awayTeamGoals)
               ) {
                 aWin++
                 goalDifference +=
@@ -319,7 +319,7 @@ export const competitionModule = {
               } else if (
                 duelMatches[z].awayTeam.id == a.id &&
                 Number(duelMatches[z].awayTeamGoals) >
-                  Number(duelMatches[z].localTeamGoals)
+                Number(duelMatches[z].localTeamGoals)
               ) {
                 aWin++
                 goalDifference +=
@@ -328,19 +328,19 @@ export const competitionModule = {
               } else if (
                 duelMatches[z].localTeam.id == a.id &&
                 Number(duelMatches[z].localTeamGoals) ==
-                  Number(duelMatches[z].awayTeamGoals)
+                Number(duelMatches[z].awayTeamGoals)
               ) {
                 aDraw++
               } else if (
                 duelMatches[z].awayTeam.id == a.id &&
                 Number(duelMatches[z].awayTeamGoals) ==
-                  Number(duelMatches[z].localTeamGoals)
+                Number(duelMatches[z].localTeamGoals)
               ) {
                 aDraw++
               } else if (
                 duelMatches[z].localTeam.id == a.id &&
                 Number(duelMatches[z].localTeamGoals) <
-                  Number(duelMatches[z].awayTeamGoals)
+                Number(duelMatches[z].awayTeamGoals)
               ) {
                 aLose++
                 goalDifference +=
@@ -349,7 +349,7 @@ export const competitionModule = {
               } else if (
                 duelMatches[z].awayTeam.id == a.id &&
                 Number(duelMatches[z].awayTeamGoals) <
-                  Number(duelMatches[z].localTeamGoals)
+                Number(duelMatches[z].localTeamGoals)
               ) {
                 aLose++
                 goalDifference +=
@@ -621,7 +621,7 @@ export const competitionModule = {
                 if (
                   duelMatches[z].localTeam.id == a.id &&
                   Number(duelMatches[z].localTeamGoals) >
-                    Number(duelMatches[z].awayTeamGoals)
+                  Number(duelMatches[z].awayTeamGoals)
                 ) {
                   aWin++
                   goalDifference +=
@@ -630,7 +630,7 @@ export const competitionModule = {
                 } else if (
                   duelMatches[z].awayTeam.id == a.id &&
                   Number(duelMatches[z].awayTeamGoals) >
-                    Number(duelMatches[z].localTeamGoals)
+                  Number(duelMatches[z].localTeamGoals)
                 ) {
                   aWin++
                   goalDifference +=
@@ -639,19 +639,19 @@ export const competitionModule = {
                 } else if (
                   duelMatches[z].localTeam.id == a.id &&
                   Number(duelMatches[z].localTeamGoals) ==
-                    Number(duelMatches[z].awayTeamGoals)
+                  Number(duelMatches[z].awayTeamGoals)
                 ) {
                   aDraw++
                 } else if (
                   duelMatches[z].awayTeam.id == a.id &&
                   Number(duelMatches[z].awayTeamGoals) ==
-                    Number(duelMatches[z].localTeamGoals)
+                  Number(duelMatches[z].localTeamGoals)
                 ) {
                   aDraw++
                 } else if (
                   duelMatches[z].localTeam.id == a.id &&
                   Number(duelMatches[z].localTeamGoals) <
-                    Number(duelMatches[z].awayTeamGoals)
+                  Number(duelMatches[z].awayTeamGoals)
                 ) {
                   aLose++
                   goalDifference +=
@@ -660,7 +660,7 @@ export const competitionModule = {
                 } else if (
                   duelMatches[z].awayTeam.id == a.id &&
                   Number(duelMatches[z].awayTeamGoals) <
-                    Number(duelMatches[z].localTeamGoals)
+                  Number(duelMatches[z].localTeamGoals)
                 ) {
                   aLose++
                   goalDifference +=

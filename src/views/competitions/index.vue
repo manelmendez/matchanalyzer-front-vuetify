@@ -80,7 +80,7 @@
       :show="dialog"
       :competition="updatingCompetition ? updatingCompetition : null"
       @confirm="confirmCreate"
-      @close=";(dialog = !dialog), (updatingCompetition = null)"
+      @close="(dialog = false), (updatingCompetition = null)"
     ></CreateCompetition>
     <DeleteDialog
       v-if="deleteDialog"

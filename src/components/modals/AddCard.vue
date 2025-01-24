@@ -1,7 +1,9 @@
 <template>
   <v-dialog :model-value="show" persistent max-width="450">
     <v-card>
-      <v-card-title class="text-h5">Añadir Tarjeta</v-card-title>
+      <v-toolbar color="primary">
+        <v-toolbar-title>DAñadir tarjeta</v-toolbar-title>
+      </v-toolbar>
       <v-card-text>
         <v-row dense>
           <v-col>

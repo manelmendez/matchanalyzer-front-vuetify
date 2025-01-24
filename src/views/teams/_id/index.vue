@@ -32,14 +32,12 @@
               }"
             >
               <v-list-item>
-
-                  <v-list-item-subtitle class="text-white">
-                    Ir a la competición
-                  </v-list-item-subtitle>
-
-                <v-list-item-action>
-                  <v-icon size="large" class="text-white">mdi-chevron-right</v-icon>
-                </v-list-item-action>
+                <template v-slot:append>
+                  <v-icon icon="mdi-chevron-right"></v-icon>
+                </template>
+                <v-list-item-subtitle class="text-white">
+                  Ir a la competición
+                </v-list-item-subtitle>
               </v-list-item>
             </v-card>
           </v-col>
@@ -210,6 +208,7 @@ export default {
       },
       scales: {
         y: {
+        beginAtZero: true,
         title: {
           display: false,
           text: 'Goles'
@@ -217,10 +216,11 @@ export default {
         ticks: {
           reverse: false,
           min: 0,
-          stepSize: 1
+          stepSize: 5
         }
         },
         x: {
+        beginAtZero: true,
         title: {
           display: false,
           text: 'Jornada'
@@ -229,34 +229,35 @@ export default {
       }
       })
     const cardOptions = ref({
-        responsive: true,
-        plugins: {
-          title: {
-        display: true,
-        text: 'Jugadores con más tarjetas'
-          }
-        },
-        scales: {
-          y: {
+      responsive: true,
+      plugins: {
         title: {
-          display: false,
-          text: 'Tarjetas'
-        },
-        ticks: {
-          reverse: false,
-          min: 0,
-          stepSize: 1
-        }
+          display: true,
+          text: 'Jugadores con más tarjetas'
+            }
           },
-          x: {
-        title: {
-          display: false,
-          text: 'Jornada'
-        }
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: false,
+                text: 'Tarjetas'
+              },
+              ticks: {
+                reverse: false,
+                min: 0,
+                stepSize: 1
+              }
+            },
+            x: {
+              beginAtZero: true,
+              title: {
+                display: false,
+                text: 'Jornada'
+              }
+            }
           }
-        }
-      }
-)
+        })
     const team = computed(() => store.getters['team/teamById'](route.params.id))
     const players = computed(() => {
       let playerList = store.getters['team/playersByTeamId'](
@@ -292,10 +293,9 @@ export default {
           goals4.push(cuarto.roundsGoals[i])
           goals5.push(quinto.roundsGoals[i])
         }
-        let style = getComputedStyle(document.body)
-        const primaryColor = style.getPropertyValue('--v-primary-base')
-        const secondaryColor = style.getPropertyValue('--v-secondary-base')
-        const color3 = colors.shades.black
+        const primaryColor = colors.red.base
+        const secondaryColor = colors.teal.base
+        const color3 = colors.lime.base
         const color4 = colors.indigo.base
         const color5 = colors.cyan.base
 
@@ -361,10 +361,9 @@ export default {
           cards2.push(segundo.roundCards[i])
           cards3.push(tercero.roundCards[i])
         }
-        let style = getComputedStyle(document.body)
-        const primaryColor = style.getPropertyValue('--v-primary-base')
-        const secondaryColor = style.getPropertyValue('--v-secondary-base')
-        const accentColor = style.getPropertyValue('--v-error-base')
+        const primaryColor = colors.red.base
+        const secondaryColor = colors.teal.base
+        const color3 = colors.lime.base
 
         return {
           labels: labels,
@@ -387,7 +386,7 @@ export default {
               label: tercero.playerName,
               data: cards3,
               backgroundColor: 'rgb(0,0,0,0.1)',
-              borderColor: accentColor,
+              borderColor: color3,
               fill: 'start'
             }
           ]

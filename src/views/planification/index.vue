@@ -49,7 +49,7 @@
           @mousedown:time="startTime"
           @mousemove:time="mouseMove"
           @mouseup:time="endDrag"
-          @mouseleave.native="cancelDrag"
+          @mouseleave="cancelDrag"
         >
           <template #event="{ event, timed, eventSummary }">
             <div class="v-event-draggable" v-html="eventSummary()"></div>

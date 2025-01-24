@@ -1,7 +1,9 @@
 <template>
   <v-dialog :model-value="show" persistent max-width="400">
     <v-card>
-      <v-card-title class="text-h5">Añadir Gol</v-card-title>
+      <v-toolbar color="primary">
+        <v-toolbar-title>Añadir gol</v-toolbar-title>
+      </v-toolbar>
       <v-card-text>
         <v-row dense>
           <v-col>

@@ -17,7 +17,7 @@ import greenDark from './assets/themes/green-dark'
 import red from './assets/themes/red'
 import redDark from './assets/themes/red-dark'
 import black from './assets/themes/black'
-import blackDark from './assets/themes/black-dark'
+import blackDark from './assets/themes/black copy'
 import teal from './assets/themes/teal'
 import tealDark from './assets/themes/teal-dark'
 import indigo from './assets/themes/indigo'
@@ -70,7 +70,6 @@ app.use(vuetify)
 app.use(router)
 app.use(store)
 store.dispatch('user/initializeStore')
-// app.use(VueMoment, { moment })
 app.config.globalProperties.$axios = axiosInstance
 
 app.mount('#app')

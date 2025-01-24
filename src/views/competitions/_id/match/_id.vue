@@ -1,14 +1,10 @@
 <template>
   <v-container>
     <v-card v-if="dataLoaded && teamsLoaded">
-      <v-toolbar dark color="primary darken-1">
+      <v-toolbar dark color="primary">
         <v-toolbar-title>Estadísticas del partido</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <!-- <v-toolbar-items>
-            <v-btn dark text @click.native="addStats">Guardar</v-btn>
-          </v-toolbar-items> -->
       </v-toolbar>
-      <v-row v-if="match.localTeam && match.awayTeam">
+      <v-row class="pt-4" v-if="match.localTeam && match.awayTeam">
         <v-col class="text-end">{{ match.localTeam.name }}</v-col>
         <v-col cols="2" class="text-center">VS</v-col>
         <v-col class="text-start">{{ match.awayTeam.name }}</v-col>
@@ -20,15 +16,15 @@
           </v-row>
           <v-row>
             <addMatchStatsContent
-              v-if="match.localTeam.manager || match.awayTeam.manager"
+              v-if="match.localTeam.managerId || match.awayTeam.managerId"
               :team="
-                match.localTeam.manager
+                match.localTeam.managerId
                   ? match.localTeam
-                  : match.awayTeam.manager
+                  : match.awayTeam.managerId
                     ? match.awayTeam
                     : null
               "
-              :roundId="Number(match.round)"
+              :roundId="Number(match.roundId)"
               :matchId="Number($route.params.matchId)"
               :matchpart="part"
               :prevPartMinutes="getPreviousMinutes(index)"
@@ -45,12 +41,10 @@
               this.matchparts.length < 4 &&
               checkManagerTeam(match.localTeam, match.awayTeam)
             "
-            fab
             color="accent"
-            dark
+            icon="mdi-plus"
             @click.stop="addMatchpartDialog = true"
           >
-            <v-icon class="material-icons">mdi-plus</v-icon>
           </v-btn>
         </v-col>
       </v-row>
@@ -87,7 +81,7 @@ export default {
       this.$emit('close')
     },
     checkManagerTeam(team1, team2) {
-      if (team1.manager != null || team2.manager != null) {
+      if (team1.managerId != null || team2.managerId != null) {
         return true
       } else return false
     },
@@ -95,8 +89,8 @@ export default {
       let matchpart = {
         ...data,
         matchId: this.$route.params.matchId,
-        roundId: this.match.round,
-        team: this.match.localTeam.manager
+        roundId: this.match.roundId,
+        team: this.match.localTeam.managerId
           ? this.match.localTeam.id
           : this.match.awayTeam.id
       }
@@ -146,22 +140,26 @@ export default {
   },
   watch: {
     async match() {
-      await this.getTeam(this.match.localTeam)
+      await this.getTeam(this.match.localTeamId)
       this.match.localTeam = this.$store.getters['team/teamById'](
-        this.match.localTeam
+        this.match.localTeamId
       )
-      await this.getPlayersByTeamId(this.match.localTeam.id)
-      this.match.localTeam.players = this.$store.getters[
-        'team/playersByTeamId'
-      ](this.match.localTeam.id)
-      await this.getTeam(this.match.awayTeam)
+      if (this.match.localTeam.managerId != null) {
+        await this.getPlayersByTeamId(this.match.localTeamId)
+        this.match.localTeam.players = this.$store.getters[
+          'team/playersByTeamId'
+        ](this.match.localTeamId)
+      }
+      await this.getTeam(this.match.awayTeamId)
       this.match.awayTeam = this.$store.getters['team/teamById'](
-        this.match.awayTeam
+        this.match.awayTeamId
       )
-      await this.getPlayersByTeamId(this.match.awayTeam.id)
-      this.match.awayTeam.players = this.$store.getters['team/playersByTeamId'](
-        this.match.awayTeam.id
-      )
+      if (this.match.awayTeam.managerId != null) {
+        await this.getPlayersByTeamId(this.match.awayTeamId)
+        this.match.awayTeam.players = this.$store.getters['team/playersByTeamId'](
+          this.match.awayTeamId
+        )
+      }
       this.teamsLoaded = true
     }
   }

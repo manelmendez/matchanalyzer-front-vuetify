@@ -2,9 +2,9 @@
   <v-dialog v-if="show" :model-value="show" width="70%" persistent>
     <v-card>
       <v-card-title>
-        <span class="text-h5" style="word-break: keep-all"
-          >Datos del jugador:</span
-        >
+        <v-toolbar color="primary">
+          <v-toolbar-title>Crear jugador</v-toolbar-title>
+        </v-toolbar>
       </v-card-title>
       <v-card-text>
         <v-container grid-list-md>

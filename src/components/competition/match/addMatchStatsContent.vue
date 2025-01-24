@@ -4,11 +4,10 @@
       <v-row dense class="mr-5 ml-5">
         <v-col cols="9" class="text-center">
           <v-select
-            outlined
-            shaped
-            v-model="matchpart.formation"
+            variant="outlined"
+            :model-value="matchpart.formation"
             :items="formacionesF7"
-            item-text="name"
+            item-title="name"
             item-value="name"
             label="Elegir formación"
           >
@@ -21,7 +20,7 @@
                 <v-col>
                   <v-img
                     :src="item.image"
-                    :contain="true"
+                    cover
                     aspect-ratio="4"
                   ></v-img>
                 </v-col>
@@ -31,38 +30,34 @@
         </v-col>
         <v-col>
           <v-text-field
-            outlined
-            shaped
+            variant="outlined"
             label="Duración"
             class="centered-input ml-2"
             type="number"
-            v-model="matchpart.time"
+            :model-value="matchpart.time"
             required
           ></v-text-field>
         </v-col>
       </v-row>
       <v-row class="mr-5 ml-5" dense>
         <v-col>
-          <v-row class="text-center" justify="center" align="center" dense>
+          <v-row class="mb-2 text-center" justify="center" align="center" dense>
             Añadir jugadores:
             <v-btn
               class="ml-2"
-              fab
               color="accent"
-              x-small
-              dark
+              size="x-small"
+              icon="mdi-plus"
               @click.stop="addMinuteDialog = true"
-            >
-              <v-icon class="material-icons">mdi-plus</v-icon>
-              <AddPlayer
-                v-if="addMinuteDialog"
-                :show="addMinuteDialog"
-                :players="team.players"
-                @close="addMinuteDialog = false"
-                @confirm="addNewMinute"
-                @create-guest-player="createGuestPlayer"
-              ></AddPlayer>
-            </v-btn>
+            ></v-btn>
+            <AddPlayer
+              v-if="addMinuteDialog"
+              :show="addMinuteDialog"
+              :players="team.players"
+              @close="addMinuteDialog = false"
+              @confirm="addNewMinute"
+              @create-guest-player="createGuestPlayer"
+            ></AddPlayer>
           </v-row>
           <v-row dense v-if="minutes">
             <v-col
@@ -79,14 +74,13 @@
                   <v-chip
                     class="ma-2"
                     color="primary"
-                    text-color="white"
-                    close
+                    closable
                     @click:close="delMinute(minute.id)"
                   >
-                    <v-avatar left class="primary darken-4">
+                    <v-avatar start class="bg-primary-darken-4">
                       {{ minute['position'] }}
                     </v-avatar>
-                    {{ getPlayerById(minute['player']).name }}
+                    {{ getPlayerById(minute['playerId']) }}
                   </v-chip>
                 </v-col>
               </v-row>
@@ -96,17 +90,15 @@
       </v-row>
       <v-row dense class="mr-5 ml-5">
         <v-col>
-          <v-row dense class="text-center" justify="center" align="center">
+          <v-row dense class="mb-2 text-center" justify="center" align="center">
             Añadir goles:
             <v-btn
               class="ml-2"
-              fab
               color="accent"
-              x-small
-              dark
+              size="x-small"
+              icon="mdi-plus"
               @click.stop="addgoalDialog = true"
             >
-              <v-icon class="material-icons">mdi-plus</v-icon>
             </v-btn>
             <AddGoal
               v-if="addgoalDialog"
@@ -132,11 +124,10 @@
                   <v-chip
                     class="ma-2"
                     color="primary"
-                    text-color="white"
-                    close
+                    closable
                     @click:close="delGoal(goal.id)"
                   >
-                    {{ getPlayerById(goal['player']).name }}
+                    {{ getPlayerById(goal['playerId']) }}
                     <v-icon>mdi-soccer</v-icon> min.{{
                       parseInt(goal['minute']) + prevPartMinutes
                     }}
@@ -149,17 +140,15 @@
       </v-row>
       <v-row dense class="mr-5 ml-5">
         <v-col>
-          <v-row dense class="text-center" justify="center" align="center">
+          <v-row dense class="mb-2 text-center" justify="center" align="center">
             Añadir tarjetas:
             <v-btn
               class="ml-2"
-              fab
               color="accent"
-              x-small
-              dark
+              size="x-small"
+              icon="mdi-plus"
               @click.stop="addcardDialog = true"
             >
-              <v-icon class="material-icons">mdi-plus</v-icon>
             </v-btn>
             <AddCard
               v-if="addcardDialog"
@@ -185,11 +174,10 @@
                   <v-chip
                     class="ma-2"
                     color="primary"
-                    text-color="white"
-                    close
+                    closable
                     @click:close="delCard(card.id)"
                   >
-                    {{ getPlayerById(card['player']).name }}
+                    {{ getPlayerById(card['playerId']) }}
                     <v-icon
                       :color="card['type'] == 'amarilla' ? 'yellow' : 'red'"
                       >mdi-cards</v-icon
@@ -204,26 +192,23 @@
       </v-row>
       <v-row dense class="mr-5 ml-5">
         <v-col>
-          <v-row class="text-center" justify="center" align="center">
+          <v-row dense class="text-center" justify="center" align="center">
             Añadir cambios:
             <v-btn
               class="ml-2"
-              fab
               color="accent"
-              x-small
-              dark
+              size="x-small"
+              icon="mdi-plus"
               @click.stop="addsubDialog = true"
-            >
-              <v-icon dense class="material-icons">mdi-plus</v-icon>
-              <AddSub
-                v-if="addsubDialog"
-                :show="addsubDialog"
-                :players="team.players"
-                :duration="Number(matchpart.time)"
-                @close="addsubDialog = false"
-                @confirm="addNewSub"
-              ></AddSub>
-            </v-btn>
+            ></v-btn>
+            <AddSub
+              v-if="addsubDialog"
+              :show="addsubDialog"
+              :players="team.players"
+              :duration="Number(matchpart.time)"
+              @close="addsubDialog = false"
+              @confirm="addNewSub"
+            ></AddSub>
           </v-row>
           <v-row dense v-if="substitutions">
             <v-col
@@ -240,13 +225,12 @@
                   <v-chip
                     class="ma-2"
                     color="primary"
-                    text-color="white"
-                    close
+                    closable
                     @click:close="delSub(sub.id)"
                   >
-                    {{ getPlayerById(sub['playerOut']).name }}
+                    {{ getPlayerById(sub['playerOut']) }}
                     <v-icon>mdi-cached</v-icon>
-                    {{ getPlayerById(sub['playerIn']).name }}
+                    {{ getPlayerById(sub['playerIn']) }}
                   </v-chip>
                   <p>min.{{ parseInt(sub['minute']) + prevPartMinutes }}</p>
                 </v-col>
@@ -298,23 +282,23 @@ export default {
       formacionesF7: [
         {
           name: '3-2-1',
-          image: require('/assets/images/formaciones/3-2-1.png')
+          image: () => import('@/assets/images/formaciones/3-2-1.png')
         },
         {
           name: '2-3-1',
-          image: require('/assets/images/formaciones/2-3-1.png')
+          image: () => import('@/assets/images/formaciones/2-3-1.png')
         },
         {
           name: '3-1-2',
-          image: require('/assets/images/formaciones/3-1-2.png')
+          iimage: () => import('@/assets/images/formaciones/3-1-2.png')
         },
         {
           name: '3-3',
-          image: require('/assets/images/formaciones/3-3.png')
+          image: () => import('@/assets/images/formaciones/3-3.png')
         },
         {
           name: '4-2',
-          image: require('/assets/images/formaciones/4-2.png')
+          image: () => import('@/assets/images/formaciones/4-2.png')
         }
       ],
       addMinuteDialog: false,
@@ -346,7 +330,7 @@ export default {
         lastname: data.lastname,
         position: null,
         year: null,
-        team: this.team.id,
+        teamId: this.team.id,
         guest: true
       }
       this.addPlayer(player).then((response) => {
@@ -445,7 +429,8 @@ export default {
       }
     },
     getPlayerById(id) {
-      return this.team.players.find((p) => p.id == id)
+      let player = this.team.players.find((p) => p.id == id)
+      return player.name
     }
   },
   computed: {

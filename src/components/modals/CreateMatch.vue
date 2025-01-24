@@ -1,9 +1,9 @@
 <template>
   <v-dialog v-if="show" :model-value="show" width="70%" persistent>
     <v-card>
-      <v-card-title>
-        <span class="text-h5">{{ headline }}</span>
-      </v-card-title>
+      <v-toolbar color="primary">
+        <v-toolbar-title>{{ headline }}</v-toolbar-title>
+      </v-toolbar>
       <v-card-text>
         <v-container grid-list-md>
           <v-row>
