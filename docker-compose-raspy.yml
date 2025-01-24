@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  matchanalyzer-front-vuetify:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        environment: "raspy"
+    container_name: "matchanalyzer-front-vuetify"
+    restart: always
+    stdin_open: true
+    tty: true
+    depends_on:
+      - matchanalyzer
+    ports:
+      - "5173:5173"
+    networks:
+      - ma_backend
+networks:
+  ma_backend:
