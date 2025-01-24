@@ -29,6 +29,8 @@ import deepPurpleDark from './assets/themes/deep-purple-dark'
 
 const theme = window.localStorage.getItem('theme') || 'green'
 const dark = window.localStorage.getItem('dark') || false
+console.log('theme', theme)
+console.log('dark', dark)
 
 const vuetify = createVuetify({
   components,

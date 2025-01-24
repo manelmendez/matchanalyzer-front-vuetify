@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-col>
         <v-card class="animated fadeInRight">
-          <v-card-title class="justify-center"
+          <v-card-title class="text-center"
             ><v-badge inline color="primary" :content="myTeams.length"
               >Equipos</v-badge
             ></v-card-title
@@ -40,7 +40,7 @@
     <v-row justify="center">
       <v-col>
         <v-card class="animated fadeInRight">
-          <v-card-title class="justify-center"
+          <v-card-title class="text-center"
             ><v-badge inline color="primary" :content="this.competitions.length"
               >Competiciones</v-badge
             ></v-card-title

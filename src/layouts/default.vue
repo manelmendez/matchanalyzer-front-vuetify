@@ -19,10 +19,10 @@
       <v-menu
         :close-on-content-click="false"
         transition="slide-y-transition"
+        location="start"
       >
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon>
-            <v-icon>mdi-palette</v-icon>
+          <v-btn v-bind="props" icon="mdi-palette">
           </v-btn>
         </template>
         <v-card>
@@ -43,39 +43,30 @@
               v-for="(item, index) in themes"
               :key="index"
               @click="selectTheme(item)"
+              class="text-center"
             >
-              <v-row justify="center">
-                <v-avatar :color="item.value.colors.primary" size="36"> </v-avatar>
-              </v-row>
+              <v-avatar :color="item.value.colors.primary" size="36"> </v-avatar>
             </v-list-item>
           </v-list>
         </v-card>
       </v-menu>
-      <v-menu id="user" :persistent="true">
+      <v-menu id="user">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon class="mr-5">
+          <v-btn v-bind="props" icon class="text-center">
             <v-avatar v-if="user.avatar != null" size="36">
-              <img :src="user.avatar" alt="Profile" />
+              <v-img :src="user.avatar" alt="Profile" />
             </v-avatar>
-            <user-avatar
+            <UserAvatar
               v-else
               :firstname="user.firstname"
               :lastname="user.lastname"
-            ></user-avatar>
+            ></UserAvatar>
           </v-btn>
         </template>
         <v-list>
-          <v-list-item to="/profile/general">
-
-              <v-list-item-title> Ver mi perfil </v-list-item-title>
-
+          <v-list-item to="/profile/general" title="Ver mi perfil">
           </v-list-item>
-          <v-list-item>
-
-              <v-list-item-title @click="logOut()" class="logout">
-                Sign Out
-              </v-list-item-title>
-
+          <v-list-item @click="logOut()" class="logout" title="Sign Out">
           </v-list-item>
         </v-list>
       </v-menu>
@@ -156,6 +147,7 @@ export default {
       }
     },
     selectTheme(theme) {
+      console.log(this.dark)
       if (this.dark) {
         window.localStorage.setItem('theme', theme.name + 'Dark')
         this.actualTheme = theme.name + 'Dark'
@@ -170,14 +162,17 @@ export default {
       }
     },
     switchChange() {
+      console.log(this.dark)
       if (this.dark) {
         window.localStorage.setItem('dark', true)
+        window.localStorage.setItem('theme', this.themeApp.global.name + 'Dark')
         this.dark = true
         this.themeApp.global.current.dark = true
         this.themeApp.global.name = this.themeApp.global.name + 'Dark'
       }
       else {
         window.localStorage.setItem('dark', false)
+        window.localStorage.setItem('theme', this.themeApp.global.name.replace('Dark', ''))
         this.dark = false
         this.themeApp.global.current.dark = false
         this.themeApp.global.name = this.themeApp.global.name.replace('Dark', '')

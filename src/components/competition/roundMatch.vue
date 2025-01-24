@@ -3,29 +3,27 @@
     <v-col class="pt-1 pb-1" cols="12" sm="5" md="4">
       <v-card
         :color="resultClass(match.localTeamGoals, match.awayTeamGoals)"
-        outlined
+        border
       >
-        <v-list class="transparent">
+        <v-list class="bg-transparent">
           <v-list-item class="grow">
-            <v-list-item-avatar tile>
+            <v-avatar tile>
               <v-img
                 :src="constants.ADDRESS + match.localTeam.avatar"
                 @error="match.localTeam.avatar = constants.DEFAULT_TEAM_URL"
                 aspect-ratio="10"
-                contain
+                cover
               ></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title :title="match.localTeam.name">
-                {{ match.localTeam.name }}
-              </v-list-item-title>
-            </v-list-item-content>
+            </v-avatar>
+            <v-list-item-title >
+              {{ match.localTeam.name }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-card>
     </v-col>
     <v-col class="pt-1 pb-1" cols="6" sm="2" md="2">
-      <v-card color="rgba(199, 199, 199, 0.55)" outlined>
+      <v-card color="rgba(199, 199, 199, 0.55)" border>
         <v-card-text class="result">
           {{ match.localTeamGoals }} - {{ match.awayTeamGoals }}
         </v-card-text>
@@ -34,94 +32,77 @@
     <v-col class="pt-1 pb-1" cols="12" sm="5" md="4">
       <v-card
         :color="resultClass(match.awayTeamGoals, match.localTeamGoals)"
-        outlined
+        border
       >
-        <v-list class="transparent">
+        <v-list class="bg-transparent">
           <v-list-item>
-            <v-list-item-avatar tile>
+            <v-avatar tile>
               <v-img
                 :src="constants.ADDRESS + match.awayTeam.avatar"
                 @error="match.awayTeam.avatar = constants.DEFAULT_TEAM_URL"
                 aspect-ratio="10"
-                contain
+                cover
+                :title="match.awayTeam.name"
               ></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title :title="match.awayTeam.name">
-                {{ match.awayTeam.name }}
-              </v-list-item-title>
-            </v-list-item-content>
+            </v-avatar>
+            <v-list-item-title >
+              {{ match.awayTeam.name }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-card>
     </v-col>
     <v-col class="pt-1 pb-1" cols="6" sm="6" md="2">
-      <v-card outlined>
+      <v-card border>
         <v-card-text class="text-center pt-0 pb-0">
-          <v-row>
-            <v-col
-              v-if="
-                match.awayTeam.manager != null ||
-                match.localTeam.manager != null
-              "
-            >
-              <v-tooltip
-                top
-                v-if="
-                  match.awayTeam.manager != null ||
-                  match.localTeam.manager != null
-                "
+          <v-tooltip
+            location="top"
+            v-if="
+              match.awayTeam.managerId != null ||
+              match.localTeam.managerId != null
+            "
+          >
+            <template v-slot:activator="{ props }">
+              <v-btn
+                size="x-small"
+                variant="text"
+                icon="mdi-file-document-edit-outline"
+                color="green-lighten-2"
+                :to="{ name: 'match-id', params: { matchId: match.id } }"
+                v-bind="props"
               >
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    x-small
-                    text
-                    icon
-                    color="green lighten-2"
-                    :to="{ name: 'match-id', params: { matchId: match.id } }"
-                    v-on="on"
-                  >
-                    <v-icon size="18">fa-file-alt</v-icon>
-                  </v-btn>
-                </template>
-                <span>Añadir/editar stats</span>
-              </v-tooltip>
-            </v-col>
-            <v-col>
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    x-small
-                    text
-                    icon
-                    color="info"
-                    @click.stop="roundDialog = true"
-                    v-on="on"
-                  >
-                    <v-icon size="18">edit</v-icon>
-                  </v-btn>
-                </template>
-                <span>Editar partido</span>
-              </v-tooltip>
-            </v-col>
-            <v-col>
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    x-small
-                    text
-                    icon
-                    color="error"
-                    @click.stop="deleteDialog = true"
-                    v-on="on"
-                  >
-                    <v-icon size="18">delete</v-icon>
-                  </v-btn>
-                </template>
-                <span>Eliminar partido</span>
-              </v-tooltip>
-            </v-col>
-          </v-row>
+              </v-btn>
+            </template>
+            <span>Añadir/editar stats</span>
+          </v-tooltip>
+          <v-tooltip location="top">
+            <template v-slot:activator="{ props }">
+              <v-btn
+                size="x-small"
+                variant="text"
+                icon="mdi-pencil"
+                color="info"
+                @click.stop="roundDialog = true"
+                v-bind="props"
+              >
+              </v-btn>
+            </template>
+            <span>Editar partido</span>
+          </v-tooltip>
+          <v-tooltip location="top">
+            <template v-slot:activator="{ props }">
+              <v-btn
+                size="x-small"
+                variant="text"
+                icon="mdi-delete"
+                color="error"
+                @click.stop="deleteDialog = true"
+                v-bind="props"
+              >
+              </v-btn>
+            </template>
+            <span>Eliminar partido</span>
+          </v-tooltip>
         </v-card-text>
       </v-card>
     </v-col>

@@ -6,9 +6,7 @@
         <v-card-text class="text-center">
           Aun no hay ninguna jornada disputada
           <br />
-          <v-btn fab color="accent" dark>
-            <i class="material-icons" @click="createRound()">add</i>
-          </v-btn>
+          <v-fab color="accent" @click="createRound()" icon="mdi-plus"></v-fab>
         </v-card-text>
       </v-card>
     </v-row>
@@ -19,31 +17,31 @@
             <v-col cols="12" md="3">
               <v-select
                 :items="rounds"
-                item-text="name"
+                item-title="name"
                 required
-                :value="round"
+                :model-value="round"
                 return-object
-                @change="changeResultRound"
+                @update:model-value="changeResultRound"
               ></v-select>
               <v-row>
                 <v-col class="text-center">
                   <v-btn
-                    text
-                    small
+                    variant="text"
+                    size="small"
                     :disabled="round.id == rounds[0].id"
                     @click="this.previousRound"
                   >
-                    <v-icon left>mdi-chevron-double-left</v-icon>Anterior
+                    <v-icon start>mdi-chevron-double-left</v-icon>Anterior
                   </v-btn>
                 </v-col>
                 <v-col class="text-center">
                   <v-btn
-                    text
-                    small
+                    variant="text"
+                    size="small"
                     :disabled="round.id == rounds[rounds.length - 1].id"
                     @click="this.nextRound"
                   >
-                    Siguiente<v-icon right>mdi-chevron-double-right</v-icon>
+                    Siguiente<v-icon end>mdi-chevron-double-right</v-icon>
                   </v-btn>
                 </v-col>
               </v-row>
@@ -51,28 +49,32 @@
             <v-col md="3">
               <v-row class="fill-height" justify="center" align="center">
                 <v-col cols="6" sm="6">
-                  <v-btn
-                    small
-                    text
-                    elevation="0"
-                    color="success"
-                    class="resultBtn"
-                    @click="createRound()"
-                  >
-                    Nueva Jornada
-                    <v-icon right dark>add</v-icon>
-                  </v-btn>
-                  <v-btn
-                    small
-                    v-if="round.id == rounds[rounds.length - 1].id"
-                    text
-                    color="error"
-                    class="resultBtn"
-                    @click.stop="deleteDialog = !deleteDialog"
-                  >
-                    Borrar Jornada
-                    <v-icon right dark>delete</v-icon>
-                  </v-btn>
+                  <v-row>
+                    <v-btn
+                      size="small"
+                      variant="tonal"
+                      elevation="0"
+                      color="success"
+                      class="resultBtn"
+                      @click="createRound()"
+                      append-icon="mdi-plus"
+                    >
+                      Nueva Jornada
+                    </v-btn>
+                  </v-row>
+                  <v-row>
+                    <v-btn
+                      size="small"
+                      v-if="round.id == rounds[rounds.length - 1].id"
+                      variant="tonal"
+                      color="error"
+                      class="resultBtn"
+                      @click.stop="deleteDialog = !deleteDialog"
+                      append-icon="mdi-delete"
+                    >
+                      Borrar Jornada
+                    </v-btn>
+                  </v-row>
                 </v-col>
               </v-row>
             </v-col>
@@ -93,12 +95,10 @@
           <br />
           <v-btn
             v-if="roundTeams.length != 0"
-            fab
             color="accent"
-            dark
             @click.stop=";(roundDialog = !roundDialog), (roundType = 'new')"
+            icon="mdi-plus"
           >
-            <i class="material-icons">add</i>
           </v-btn>
         </v-card-text>
       </v-card>
@@ -128,6 +128,7 @@ import roundMatch from '@/components/competition/roundMatch.vue'
 import DeleteDialog from '@/components/modals/DeleteDialog.vue'
 import CreateMatch from '@/components/modals/CreateMatch.vue'
 export default {
+  name: 'Results-page',
   components: {
     roundMatch,
     DeleteDialog,
@@ -236,6 +237,7 @@ export default {
 }
 .resultBtn {
   width: 100%;
+  margin: 2px;
 }
 .results {
   width: 100%;

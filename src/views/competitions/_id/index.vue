@@ -7,8 +7,8 @@
       stacked
       color="white"
       height="50px"
+      slider-color="secondary"
     >
-      <v-tabs-slider color="secondary"></v-tabs-slider>
       <v-tab class="compTab" to="summary">
         Resumen
         <v-icon size="20px">mdi-chart-line</v-icon>

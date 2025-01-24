@@ -11,22 +11,20 @@
         <tr :class="setClass(index)">
           <td class="text-center">{{ index + 1 }}</td>
           <td class="text-center">
-            <v-list-item-avatar
-              size="30"
-              :tile="true"
-              style="cursor: pointer"
-              @click="
+
+              <v-img
+                aspect-ratio="1"
+                width="20"
+                :src="constants.ADDRESS + item.avatar"
+                @error="item.avatar = constants.DEFAULT_TEAM_URL"
+                cover
+                style="cursor: pointer"
+                @click="
                 $router.push(
                   '/competitions/' + $route.params.id + '/team/' + item.id
                 )
               "
-            >
-              <v-img
-                :src="constants.ADDRESS + item.avatar"
-                @error="item.avatar = constants.DEFAULT_TEAM_URL"
-                contain
               />
-            </v-list-item-avatar>
           </td>
           <td class="text-center">{{ item.name }}</td>
           <td class="text-center" style="font-weight: bold">

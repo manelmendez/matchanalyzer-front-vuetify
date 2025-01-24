@@ -110,7 +110,6 @@ export default {
         const response = await proxy.$axios.get(
           `teams/${props.team.id}/competition/${props.team.competitionId}`
         )
-        console.log(response)
         teamStats.value = response.data.teamStats
         // Aquí puedes actualizar chartData con los datos obtenidos
         let victorias = teamStats.value.stats.wins

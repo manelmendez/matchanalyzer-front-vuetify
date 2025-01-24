@@ -14,35 +14,35 @@
           <v-row justify="space-between" align="center">
             <v-col cols="6" md="3">
               <v-select
-                dense
+                density="compact"
                 :items="rounds"
-                item-text="name"
+                item-title="name"
                 required
-                :value="round"
+                :model-value="round"
                 return-object
-                @change="changeResultRound"
+                @update:model-value="changeResultRound"
               ></v-select>
             </v-col>
             <v-col cols="6" md="3">
               <v-row>
                 <v-col class="text-center">
                   <v-btn
-                    text
-                    small
+                    variant="text"
+                    size="small"
                     :disabled="round.id == rounds[0].id"
                     @click="this.previousRound"
                   >
-                    <v-icon left>mdi-chevron-double-left</v-icon>Anterior
+                    <v-icon start>mdi-chevron-double-left</v-icon>Anterior
                   </v-btn>
                 </v-col>
                 <v-col class="text-center">
                   <v-btn
-                    text
-                    small
+                    variant="text"
+                    size="small"
                     :disabled="round.id == rounds[rounds.length - 1].id"
                     @click="this.nextRound"
                   >
-                    Siguiente<v-icon right>mdi-chevron-double-right</v-icon>
+                    Siguiente<v-icon end>mdi-chevron-double-right</v-icon>
                   </v-btn>
                 </v-col>
               </v-row>
@@ -50,7 +50,7 @@
             <v-col cols="12" md="3" align-self="center">
               <v-row justify="center" align="center">
                 <v-switch
-                  dense
+                  density="compact"
                   label="Ver detalles"
                   v-model="details"
                 ></v-switch>
@@ -74,7 +74,7 @@ import { mapGetters } from 'vuex'
 import constants from '@/assets/constants/constants'
 import classificationTable from '@/components/competition/classificationTable.vue'
 export default {
-  name: 'classification',
+  name: 'classification-page',
   components: {
     classificationTable
   },

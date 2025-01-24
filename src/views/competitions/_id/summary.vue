@@ -12,35 +12,37 @@
         <v-row justify="space-between" align="center">
           <v-col cols="6" md="3">
             <v-select
-              dense
+              density="compact"
               :items="rounds"
-              item-text="name"
+              item-title="name"
               required
-              :value="round"
+              :model-value="round"
               return-object
-              @change="changeResultRound"
+              @update:model-value="changeResultRound"
             ></v-select>
           </v-col>
           <v-col cols="6" md="3">
             <v-row>
               <v-col class="text-center">
                 <v-btn
-                  text
-                  small
+                  variant="text"
+                  size="small"
                   :disabled="round.id == rounds[0].id"
                   @click="this.previousRound"
+                  prepend-icon="mdi-chevron-double-left"
                 >
-                  <v-icon left>mdi-chevron-double-left</v-icon>Anterior
+                Anterior
                 </v-btn>
               </v-col>
               <v-col class="text-center">
                 <v-btn
-                  text
-                  small
+                  variant="text"
+                  size="small"
                   :disabled="round.id == rounds[rounds.length - 1].id"
                   @click="this.nextRound"
+                  append-icon="mdi-chevron-double-right"
                 >
-                  Siguiente<v-icon right>mdi-chevron-double-right</v-icon>
+                  Siguiente
                 </v-btn>
               </v-col>
             </v-row>
@@ -48,7 +50,7 @@
         </v-row>
       </v-card-title>
     </v-card>
-    <v-row>
+    <v-row class="mt-5 mb-1">
       <v-col cols="12" sm="12" md="6" lg="4">
         <TopScorers
           v-if="topScorers.length != 0"
@@ -81,7 +83,7 @@
         <v-card
           class="teamCard d-flex flex-column"
           min-height="100%"
-          @click.native.stop="
+          @click.stop="
             $router.push({
               name: 'competitionStats',
               params: { teamId: team.id }
@@ -89,50 +91,45 @@
           "
         >
           <v-icon
-            v-if="team.manager"
+            v-if="team.managerId"
             style="position: absolute; right: 3px; top: 3px"
             color="yellow"
-            >star</v-icon
+            >mdi-star</v-icon
           >
-          <v-col>
-            <v-img
-              justify="center"
-              :src="constants.ADDRESS + team.avatar"
-              @error="team.avatar = constants.DEFAULT_TEAM_URL"
-              aspect-ratio="3"
-              size="30"
-              contain
-            ></v-img>
-          </v-col>
-          <v-card-text class="title-card text-center grow">
+          <v-img
+            :src="constants.ADDRESS + team.avatar"
+            @error="team.avatar = constants.DEFAULT_TEAM_URL"
+            aspect-ratio="1"
+            width="100"
+            class="mx-auto my-3"
+          ></v-img>
+          <v-card-title class="title-card text-center">
             <b>{{ team.name }}</b>
-          </v-card-text>
+          </v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-tooltip top>
-              <template v-slot:activator="{ on }">
+            <v-tooltip location="top">
+              <template v-slot:activator="{ props }">
                 <v-btn
-                  text
-                  icon
+                  variant="text"
+                  icon="mdi-pencil"
                   color="info"
                   @click.stop=";(updatingTeam = team), (dialog = true)"
-                  v-on="on"
+                  v-bind="props"
                 >
-                  <v-icon size="18">edit</v-icon>
                 </v-btn>
               </template>
               <span>Editar equipo</span>
             </v-tooltip>
-            <v-tooltip top>
-              <template v-slot:activator="{ on }">
+            <v-tooltip location="top">
+              <template v-slot:activator="{ props }">
                 <v-btn
-                  text
-                  icon
+                  variant="text"
+                  icon="mdi-delete"
                   color="error"
-                  v-on="on"
+                  v-bind="props"
                   @click.stop=";(deletingTeam = team.id), (deleteDialog = true)"
                 >
-                  <v-icon size="18">delete</v-icon>
                 </v-btn>
               </template>
               <span>Borrar equipo</span>
@@ -142,45 +139,42 @@
       </v-col>
     </v-row>
     <v-speed-dial
-      v-model="fab"
-      bottom
-      right
-      direction="top"
+      location="top center"
       transition="slide-y-reverse-transition"
-      fixed
     >
-      <template v-slot:activator>
-        <v-btn v-model="fab" fab color="accent" dark>
-          <v-icon v-if="fab">close</v-icon>
-          <v-icon v-else>add</v-icon>
-        </v-btn>
-      </template>
-      <v-tooltip left>
-        <template v-slot:activator="{ on }">
+    <template v-slot:activator="{ props: activatorProps }">
+      <v-fab
+        v-bind="activatorProps"
+        size="large"
+        :model-value="fab"
+        color="accent"
+        :icon="fab ? mdi-close : mdi-plus">
+      </v-fab>
+    </template>
+      <v-tooltip location="left">
+        <template v-slot:activator="{ props }">
           <v-btn
-            v-on="on"
-            fab
-            dark
-            small
+            key="1"
+            v-bind="props"
+            icon="mdi-plus_one"
+            size="small"
             color="green"
             @click.stop="dialog = !dialog"
           >
-            <v-icon>plus_one</v-icon>
           </v-btn>
         </template>
         <span>Añadir equipo a competición</span>
       </v-tooltip>
-      <v-tooltip left>
-        <template v-slot:activator="{ on }">
+      <v-tooltip location="left">
+        <template v-slot:activator="{ props }">
           <v-btn
-            v-on="on"
-            fab
-            dark
-            small
+            key="2"
+            v-bind="props"
+            icon="mdi-plus"
+            size="small"
             color="indigo"
             @click.stop="addOwnTeam = !addOwnTeam"
           >
-            <v-icon>add</v-icon>
           </v-btn>
         </template>
         <span>Añadir equipo propio</span>
@@ -188,13 +182,13 @@
     </v-speed-dial>
     <v-dialog v-model="addOwnTeam" persistent max-width="50%">
       <v-card>
-        <v-card-title class="headline"
+        <v-card-title class="text-h5"
           >Selecciona el equipo que quieres añadir</v-card-title
         >
         <v-card-text>
           <v-select
             :items="myTeamsWithoutCompetition"
-            item-text="name"
+            item-title="name"
             return-object
             v-model="team"
             label="Seleccionar Equipo"
@@ -202,7 +196,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="addOwnTeam = false">Cancelar</v-btn>
+          <v-btn variant="text" @click="addOwnTeam = false">Cancelar</v-btn>
           <v-btn color="primary" @click="addMyTeam()">Añadir</v-btn>
         </v-card-actions>
       </v-card>
@@ -233,6 +227,7 @@ import TopScorers from '@/components/competition/summary/topScorers.vue'
 import MostTrashed from '@/components/competition/summary/mostTrashed.vue'
 import TopDifference from '@/components/competition/summary/topDifference.vue'
 export default {
+  name: 'Summary-Competition',
   components: {
     CreateTeam,
     DeleteDialog,

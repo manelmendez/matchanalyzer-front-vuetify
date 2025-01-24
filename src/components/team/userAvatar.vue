@@ -1,5 +1,5 @@
 <template>
-  <v-avatar start class="bg-primary text-white" :size="size" color="secondary">
+  <v-avatar class="text-white" :size="size" color="primary">
     {{ initials }}
   </v-avatar>
 </template>

@@ -5,12 +5,12 @@
         <v-card flat>
           <v-card-title style="justify-content: center"> Líder </v-card-title>
           <v-img
-              :src="constants.ADDRESS + competition.teams[0].avatar"
-              @error="competition.teams[0].avatar = constants.DEFAULT_TEAM_URL"
-              aspect-ratio="1/1"
-              :width="50"
-              cover
-            ></v-img>
+            class="mx-auto my-1"
+            :src="constants.ADDRESS + competition.teams[0].avatar"
+            @error="competition.teams[0].avatar = constants.DEFAULT_TEAM_URL"
+            aspect-ratio="1"
+            :width="50">
+          </v-img>
           <v-card-text class="text-center">
             {{ competition.teams[0].name }}
           </v-card-text>
@@ -19,20 +19,20 @@
       <v-col class="text-center" cols="6" sm="6" md="3" lg="3">
         <v-card flat>
           <v-card-title style="justify-content: center"> Último </v-card-title>
-          <v-card-text>
-            <v-img
-              :src="
-                constants.ADDRESS +
-                competition.teams[competition.teams.length - 1].avatar
-              "
-              @error="
-                competition.teams[competition.teams.length - 1].avatar =
-                  constants.DEFAULT_TEAM_URL
-              "
-              aspect-ratio="1/1"
-              :width="50"
-              cover
-            ></v-img>
+          <v-img
+            class="mx-auto my-1"
+            :src="
+              constants.ADDRESS +
+              competition.teams[competition.teams.length - 1].avatar
+            "
+            @error="
+              competition.teams[competition.teams.length - 1].avatar =
+                constants.DEFAULT_TEAM_URL
+            "
+            aspect-ratio="1"
+            :width="50"
+          ></v-img>
+          <v-card-text class="text-center">
             {{ competition.teams[competition.teams.length - 1].name }}
           </v-card-text>
         </v-card>

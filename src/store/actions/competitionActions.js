@@ -22,7 +22,6 @@ export const getCompetition = ({ commit }, id) => {
 export const getUserCompetitions = ({ commit }, id) => {
   console.log('ACTION -- getUserCompetitions')
   return axios.get('competitions/user/' + id).then((response) => {
-    console.log(response.data)
     commit(types.GET_COMPETITIONS, response.data.competitions)
   })
 }

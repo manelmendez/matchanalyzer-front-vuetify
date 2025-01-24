@@ -1,37 +1,37 @@
 <template>
-  <v-card class="mt-5">
+  <v-card style="overflow: visible;">
     <v-sheet
       class="v-sheet--offset mx-auto"
       color="primary"
-      elevation="12"
+      elevation="4"
       max-width="calc(100% - 32px)"
       max-height="calc(100% - 32px)"
+      rounded
     >
-      <v-list class="transparent" dense>
-        <v-list-item v-for="i in 4" :key="i" class="white--text">
-          <v-list-item-avatar tile size="30">
-            <v-img
-              :src="constants.ADDRESS + topDifference[i - 1].avatar"
-              @error="topDifference[i - 1].avatar = constants.DEFAULT_TEAM_URL"
-              contain
-            />
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title :title="topDifference[i - 1].name">
-              {{ topDifference[i - 1].name }}
-            </v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-btn icon small>
-              {{ topDifference[i - 1].stats.goalDif
-              }}<v-icon class="white--text">mdi-soccer</v-icon>
-            </v-btn>
-          </v-list-item-action>
+      <v-list class="bg-transparent" density="compact">
+        <v-list-item v-for="i in 4" :key="i" class="text-white" :title="topDifference[i - 1].name">
+          <template v-slot:prepend>
+            <v-avatar tile size="30">
+              <v-img
+                :src="constants.ADDRESS + topDifference[i - 1].avatar"
+                @error="topDifference[i - 1].avatar = constants.DEFAULT_TEAM_URL"
+                cover
+              />
+            </v-avatar>
+          </template>
+          <template v-slot:append>
+            <v-list-item-action>
+              <v-btn variant="text" append-icon="mdi-soccer" size="small">
+                {{ topDifference[i - 1].stats.goalDif
+                }}
+              </v-btn>
+            </v-list-item-action>
+          </template>
         </v-list-item>
       </v-list>
     </v-sheet>
     <v-card-text class="pt-0">
-      <div class="text-center title mb-2">Mejor diferencia de goles</div>
+      <div class="text-center text-h7 mb-2">Mejor diferencia de goles</div>
     </v-card-text>
   </v-card>
 </template>
@@ -55,7 +55,7 @@ export default {
 
 <style scoped>
 .v-sheet--offset {
-  top: -24px;
+  top: -15px;
   position: relative;
 }
 </style>
