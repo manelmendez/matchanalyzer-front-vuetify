@@ -16,5 +16,6 @@ RUN npm install
 # Run server
 WORKDIR /projects/matchanalyzer-front-vuetify/
 
-EXPOSE 5173
-CMD [ "npm", "run", "build" ]
+RUN npm run build
+# CMD [ "npm", "run", "build" ]
+COPY dist /var/www/html
