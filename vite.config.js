@@ -28,13 +28,6 @@ export default defineConfig({
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       preflightContinue: true,
       optionsSuccessStatus: 204,
-    },
-    proxy: {
-      '/api': {
-        target: constants.API_ADDRESS,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
     }
   },
   base: './',
