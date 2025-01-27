@@ -14,7 +14,7 @@ services:
     volumes:
       - ./dist:/var/www/html
     networks:
-      - ma_backend
+      - matchanalyzer_ma_backend
 networks:
   matchanalyzer_ma_backend:
     external: true
