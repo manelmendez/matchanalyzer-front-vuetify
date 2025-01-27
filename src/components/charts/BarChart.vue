@@ -1,33 +1,35 @@
 <template>
-  <LineChartComponent
+  <Bar
     :chartOptions="chartOptionsComputed"
     :chartData="chartDataComputed"
   />
 </template>
 
 <script>
-import { Line } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement } from 'chart.js'
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { defineComponent, computed } from 'vue'
 
-ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default defineComponent({
-  name: 'LineChart',
-  components: { LineChartComponent: Line },
+  name: 'PieChart',
+  components: {
+    Bar
+  },
   props: {
     chartData: {
       type: Object,
       required: true
     },
-    chatOptions: {
+    chartOptions: {
       type: Object,
       default: () => ({})
     }
   },
   setup(props) {
     const chartDataComputed = computed(() => props.chartData)
-    const chartOptionsComputed = computed(() => props.chatOptions)
+    const chartOptionsComputed = computed(() => props.chartOptions)
 
     return {
       chartDataComputed,

@@ -1,3 +1,11 @@
+<template>
+  <Pie
+    :chartOptions="chartOptionsComputed"
+    :chartData="chartDataComputed"
+  />
+</template>
+
+<script>
 import { defineComponent, computed } from 'vue'
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js'
@@ -14,18 +22,19 @@ export default defineComponent({
       type: Object,
       required: true
     },
-    options: {
+    chartOptions: {
       type: Object,
       default: () => ({})
     }
   },
   setup(props) {
-    const chartData1 = computed(() => props.chartData)
-    const chartOptions1 = computed(() => props.options)
+    const chartDataComputed = computed(() => props.chartData)
+    const chartOptionsComputed = computed(() => props.chartOptions)
 
     return {
-      chartData1,
-      chartOptions1
+      chartDataComputed,
+      chartOptionsComputed
     }
   }
 })
+</script>

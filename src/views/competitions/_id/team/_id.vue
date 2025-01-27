@@ -1,31 +1,31 @@
 <template>
   <v-container fluid v-if="team">
-    {{ team.name }}
+    <div>{{ team.name }}</div>
     <v-row>
-      <v-col cols="12" sm="6" md="6" lg="4">
+      <v-col cols="12" sm="6" md="4" lg="4" style="margin-top: 2em;">
         <positionstats
           :chart-data="positiondatacollection"
-          :height="250"
+          :height="100"
           :team="team"
         />
       </v-col>
-      <v-col cols="12" sm="6" md="6" lg="4">
+      <v-col cols="12" sm="6" md="4" lg="4" style="margin-top: 2em;">
         <matchstats
           :chart-data="matchesdatacollection"
-          :height="250"
+          :height="100"
           :team="team"
         />
       </v-col>
-      <v-col cols="12" sm="12" md="6" lg="4">
+      <v-col cols="12" sm="6" md="4" lg="4" style="margin-top: 2em;">
         <goalstats
           :chart-data="goalsdatacollection"
-          :height="250"
+          :height="100"
           :team="team"
         />
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="12" md="6" lg="4">
+      <v-col cols="12" sm="6" md="4" lg="4">
         <v-card>
           <v-card-title class="justify-center"> Total </v-card-title>
           <v-card-text>
@@ -54,7 +54,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="6" md="6" lg="4">
+      <v-col cols="12" sm="6" md="4" lg="4">
         <v-card>
           <v-card-title class="justify-center"> Local </v-card-title>
           <v-card-text>
@@ -85,7 +85,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="6" md="6" lg="4">
+      <v-col cols="12" sm="6" md="4" lg="4">
         <v-card>
           <v-card-title class="justify-center"> Visitante </v-card-title>
           <v-card-text>
@@ -118,9 +118,9 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col
-        ><teamMatchList :team="team" :rounds="rounds"></teamMatchList
-      ></v-col>
+      <v-col>
+        <teamMatchList :team="team" :rounds="rounds"></teamMatchList>
+      </v-col>
     </v-row>
   </v-container>
 </template>

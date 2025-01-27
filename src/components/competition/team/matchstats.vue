@@ -1,18 +1,17 @@
 <template>
-  <v-card class="mt-9">
+  <v-card style="overflow: visible;">
     <v-sheet
       class="v-sheet--offset mx-auto"
       color="rgb(220,220,220,0.9)"
-      elevation="12"
+      elevation="4"
       max-width="calc(100% - 32px)"
       max-height="calc(100% - 32px)"
     >
-      <pie-chart
-        :chart-data="this.chartData"
-        :height="this.height"
-        :options="options"
+      <PieChart
+        :chartData="this.chartData"
+        :chartOptions="options"
         class="chartStyle"
-      ></pie-chart>
+      ></PieChart>
     </v-sheet>
 
     <v-card-text class="pt-0">
@@ -25,24 +24,43 @@
 </template>
 
 <script>
-import PieChart from '@/components/charts/PieChart.js'
+import { defineComponent } from 'vue';
+import PieChart from '@/components/charts/PieChart.vue';
 
-export default {
+export default defineComponent({
+  name: "matchStats",
   components: { PieChart },
-  props: ['chart-data', 'height', 'team'],
+  props: {
+    chartData: {
+      type: Object,
+      required: true
+    },
+    height: {
+      type: Number,
+      required: true
+    },
+    team: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       options: {
-        title: {
-          display: false,
-          text: '% victorias / empates / derrotas'
+        responsive: true,
+        height: this.height,
+        plugins: {
+          title: {
+            display: false,
+            text: '% victorias / empates / derrotas'
+          }
         },
         borderColor: 'red',
-        cutoutPercentage: 50
+        cutout: '50%'
       }
     }
   }
-}
+});
 </script>
 <style scoped>
 .v-sheet--offset {

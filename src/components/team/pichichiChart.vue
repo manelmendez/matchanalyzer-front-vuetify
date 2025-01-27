@@ -3,7 +3,7 @@
     rounded
     class="v-sheet--offset mx-auto"
     color="rgb(220,220,220,0.9)"
-    elevation="12"
+    elevation="4"
     max-width="calc(100% - 32px)"
     max-height="calc(100% - 32px)"
   >

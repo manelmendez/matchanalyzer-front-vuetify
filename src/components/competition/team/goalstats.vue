@@ -1,23 +1,22 @@
 <template>
-  <v-card class="mt-9">
+  <v-card style="overflow: visible;">
     <v-sheet
       class="v-sheet--offset mx-auto"
       color="rgb(220,220,220,0.9)"
-      elevation="12"
+      elevation="4"
       max-width="calc(100% - 32px)"
       max-height="calc(100% - 32px)"
     >
-      <bar-chart
+      <BarChart
         :chart-data="this.chartData"
-        :height="this.height"
         :options="options"
         class="chartStyle"
-      ></bar-chart>
+      ></BarChart>
     </v-sheet>
 
     <v-card-text class="pt-0">
-      <div class="title font-weight-light mb-2">Goles del equipo</div>
-      <div class="subheading font-weight-light grey--text">
+      <div class="text-h6 font-weight-light mb-2">Goles del equipo</div>
+      <div class="subheading font-weight-light text-grey">
         Temporada {{ team.season }}
       </div>
     </v-card-text>
@@ -25,44 +24,59 @@
 </template>
 
 <script>
-import BarChart from '@/components/charts/BarChart.js'
+import BarChart from '@/components/charts/BarChart.vue'
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
+  name: "goalStats",
   components: { BarChart },
-  props: ['chart-data', 'height', 'team'],
+  props: {
+    chartData: {
+      type: Object,
+      required: true
+    },
+    height: {
+      type: Number,
+      required: true
+    },
+    team: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       options: {
-        title: {
-          display: true,
-          text: 'Goles por jornada'
+        responsive: true,
+        height: this.height,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Goles por jornada'
+          }
         },
         scales: {
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'Goles'
-              },
-              ticks: {
-                beginAtZero: true,
-                stepSize: 1
-              }
+          y: {
+            title: {
+              display: true,
+              text: 'Goles'
+            },
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1
             }
-          ],
-          xAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'Jornadas'
-              }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Jornadas'
             }
-          ]
+          }
         }
       }
     }
   }
-}
+});
 </script>
 <style scoped>
 .v-sheet--offset {

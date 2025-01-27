@@ -30,8 +30,9 @@
                     size="small"
                     :disabled="round.id == rounds[0].id"
                     @click="this.previousRound"
+                    prepend-icon="mdi-chevron-double-left"
                   >
-                    <v-icon start>mdi-chevron-double-left</v-icon>Anterior
+                    Anterior
                   </v-btn>
                 </v-col>
                 <v-col class="text-center">
@@ -40,8 +41,9 @@
                     size="small"
                     :disabled="round.id == rounds[rounds.length - 1].id"
                     @click="this.nextRound"
+                    append-icon="mdi-chevron-double-right"
                   >
-                    Siguiente<v-icon end>mdi-chevron-double-right</v-icon>
+                    Siguiente
                   </v-btn>
                 </v-col>
               </v-row>
@@ -145,11 +147,12 @@ export default {
     createRound() {
       let body = {
         name: 'Jornada ' + (this.rounds.length + 1),
-        competition: this.competition.id
+        competitionId: this.competition.id
       }
       this.addRound(body)
     },
     async createMatch(newMatch) {
+      console.log(newMatch)
       if (newMatch.localTeam == newMatch.awayTeam) {
         alert('No puedes seleccionar el mismo equipo en ambos lados')
       } else {

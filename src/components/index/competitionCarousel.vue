@@ -6,8 +6,8 @@
           <v-card-title style="justify-content: center"> Líder </v-card-title>
           <v-img
             class="mx-auto my-1"
-            :src="constants.ADDRESS + competition.teams[0].avatar"
-            @error="competition.teams[0].avatar = constants.DEFAULT_TEAM_URL"
+            :src="constants.ADDRESS + localCompetition.teams[0].avatar"
+            @error="localCompetition.teams[0].avatar = constants.DEFAULT_TEAM_URL"
             aspect-ratio="1"
             :width="50">
           </v-img>
@@ -23,10 +23,10 @@
             class="mx-auto my-1"
             :src="
               constants.ADDRESS +
-              competition.teams[competition.teams.length - 1].avatar
+              localCompetition.teams[competition.teams.length - 1].avatar
             "
             @error="
-              competition.teams[competition.teams.length - 1].avatar =
+              localCompetition.teams[competition.teams.length - 1].avatar =
                 constants.DEFAULT_TEAM_URL
             "
             aspect-ratio="1"
@@ -74,6 +74,7 @@ export default {
   },
   data() {
     return {
+      localCompetition: JSON.parse(JSON.stringify(this.competition)),
       constants: constants
     }
   },

@@ -7,15 +7,14 @@
       >
         <v-list class="bg-transparent">
           <v-list-item class="grow">
-            <v-avatar tile>
-              <v-img
-                :src="constants.ADDRESS + match.localTeam.avatar"
-                @error="match.localTeam.avatar = constants.DEFAULT_TEAM_URL"
-                aspect-ratio="10"
-                cover
-              ></v-img>
-            </v-avatar>
-            <v-list-item-title >
+            <v-img
+              class="mx-auto"
+              :src="constants.ADDRESS + localMatch.localTeam.avatar"
+              @error="localMatch.localTeam.avatar = constants.DEFAULT_TEAM_URL"
+              aspect-ratio="1"
+              :width="30"
+            ></v-img>
+          <v-list-item-title >
               {{ match.localTeam.name }}
             </v-list-item-title>
           </v-list-item>
@@ -36,15 +35,13 @@
       >
         <v-list class="bg-transparent">
           <v-list-item>
-            <v-avatar tile>
-              <v-img
-                :src="constants.ADDRESS + match.awayTeam.avatar"
-                @error="match.awayTeam.avatar = constants.DEFAULT_TEAM_URL"
-                aspect-ratio="10"
-                cover
-                :title="match.awayTeam.name"
-              ></v-img>
-            </v-avatar>
+            <v-img
+              class="mx-auto"
+              :src="constants.ADDRESS + localMatch.awayTeam.avatar"
+              @error="localMatch.awayTeam.avatar = constants.DEFAULT_TEAM_URL"
+              aspect-ratio="1"
+              :width="30"
+            ></v-img>
             <v-list-item-title >
               {{ match.awayTeam.name }}
             </v-list-item-title>
@@ -144,6 +141,7 @@ export default {
   },
   data() {
     return {
+      localMatch: JSON.parse(JSON.stringify(this.match)),
       constants: constants,
       roundDialog: false,
       deleteDialog: false,
