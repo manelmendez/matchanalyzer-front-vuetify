@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '@/store/store'
 import router from '@/router'
-import constants from './constants/constants';
+import constants from '@/assets/constants/constants';
 
 const axiosInstance = axios.create({
   baseURL: constants.API_ADDRESS
@@ -17,17 +17,6 @@ if (authUser) {
   const parsedAuthUser = JSON.parse(authUser);
   axiosInstance.defaults.headers.common['Authorization'] = 'Bearer ' + parsedAuthUser.token;
 }
-axiosInstance.interceptors.request.use(
-  function (config) {
-    console.log('Request:', config);
-    console.log('Request URL:', config.url.startsWith('http') ? config.url : config.baseURL + config.url);
-
-    return config;
-  },
-  function (error) {
-    return Promise.reject(error);
-  }
-);
 
 axiosInstance.interceptors.response.use(
   function (response) {

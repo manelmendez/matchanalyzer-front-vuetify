@@ -9,8 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "docker": "cross-env DOCKER=true vite build",
-    "raspy": "cross-env RASPY=true vite build",
+    "docker": "cross-env VITE_DOCKER=true vite build",
+    "raspy": "cross-env VITE_RASPY=true vite build",
     "prettier": "prettier ./src --check"
   },
   "dependencies": {

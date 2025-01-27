@@ -1,12 +1,12 @@
 const constants = {
-  ADDRESS: process.env.RASPY
+  ADDRESS: import.meta.env.VITE_RASPY
     ? 'https://matchanalyzer.duckdns.org/'
-    : process.env.DOCKER
+    : import.meta.env.VITE_DOCKER
       ? 'http://localhost:9009/'
       : 'http://localhost:9000/',
-  API_ADDRESS: process.env.RASPY
+  API_ADDRESS: import.meta.env.VITE_RASPY
     ? 'https://matchanalyzer.duckdns.org/v1/'
-    : process.env.DOCKER
+    : import.meta.env.VITE_DOCKER
       ? 'http://localhost:9009/v1/'
       : 'http://localhost:9000/v1/',
   DEFAULT_TEAM_URL: 'assets/images/escudo-vacio.png',
@@ -78,8 +78,6 @@ const constants = {
   categoriesF7: ['Prebenjamín', 'Benjamín', 'Alevín'],
   categoriesF11: ['Infantil', 'Cadete', 'Juvenil', 'Amateur'],
   positions: ['PT', 'LD', 'LI', 'CT', 'MCD', 'MC', 'MP', 'ED', 'EI', 'DC']
-  // LOCAL_API_ADDRESS : 'http://37.133.124.200:9000/v1/',
-  // LOCAL_ADDRESS : 'http://37.133.124.200:9000/',
 }
 
 export default constants

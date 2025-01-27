@@ -7,12 +7,6 @@ RUN apk add --no-cache g++ make python3
 # set work directory on Docker
 WORKDIR /app
 
-# Install dependencies
-# RUN npm install && npm run build
-# CMD [ "npm", "run", "build" ]
-# RUN mkdir -p /usr/share/nginx/html && chown -R node:node /usr/share/nginx/html
-# RUN if [ -d dist ]; then cp -r dist /usr/share/nginx/html; else echo "no existe"; fi
-
 # Copia los archivos de tu proyecto
 COPY . .
 
