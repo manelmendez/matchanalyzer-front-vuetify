@@ -27,7 +27,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copia los archivos construidos al directorio de Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /projects/matchanalyzer-front-vuetify/dist /usr/share/nginx/html
 
 # Exponer el puerto 80
 EXPOSE 80
