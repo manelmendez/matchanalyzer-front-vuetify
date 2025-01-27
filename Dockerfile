@@ -20,7 +20,7 @@ COPY . .
 RUN npm install
 
 # Construye el proyecto
-RUN npm run build
+RUN npm run ${environment}
 
 # Al final, solo necesitamos los archivos estáticos de Vue.js
 # Estos se copiarán al directorio de trabajo que Caddy usará más tarde
