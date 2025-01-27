@@ -16,5 +16,5 @@ services:
     networks:
       - ma_backend
 networks:
-  ma_backend:
+  matchanalyzer_ma_backend:
     external: true
