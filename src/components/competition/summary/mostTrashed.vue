@@ -9,19 +9,19 @@
       rounded
     >
       <v-list class="bg-transparent" density="compact">
-        <v-list-item v-for="i in 4" :key="i" class="text-white" :title="mostTrashed[i - 1].name">
+        <v-list-item v-for="i in 4" :key="i" class="text-white" :title="localMostTrashed[i - 1].name">
         <template v-slot:prepend>
           <v-avatar tile size="30">
             <v-img
-              :src="constants.ADDRESS + mostTrashed[i - 1].avatar"
-              @error="mostTrashed[i - 1].avatar = constants.DEFAULT_TEAM_URL"
+              :src="constants.ADDRESS + localMostTrashed[i - 1].avatar"
+              @error="localMostTrashed[i - 1].avatar = constants.DEFAULT_TEAM_URL"
             />
           </v-avatar>
         </template>
         <template v-slot:append>
           <v-list-item-action>
             <v-btn variant="text" append-icon="mdi-soccer" size="small">
-              {{ mostTrashed[i - 1].stats.againstGoals
+              {{ localMostTrashed[i - 1].stats.againstGoals
               }}
             </v-btn>
           </v-list-item-action>
@@ -51,6 +51,7 @@ export default {
   },
   data() {
     return {
+      localMostTrashed: JSON.parse(JSON.stringify(this.mostTrashed)),
       constants: constants
     }
   }

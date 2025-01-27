@@ -9,12 +9,12 @@
       rounded
     >
       <v-list class="bg-transparent" density="compact">
-        <v-list-item v-for="i in 4" :key="i" class="text-white" :title="topScorers[i - 1].name">
+        <v-list-item v-for="i in 4" :key="i" class="text-white" :title="localTopScorers[i - 1].name">
           <template v-slot:prepend>
             <v-avatar tile size="30">
               <v-img
-                :src="constants.ADDRESS + topScorers[i - 1].avatar"
-                @error="topScorers[i - 1].avatar = constants.DEFAULT_TEAM_URL"
+                :src="constants.ADDRESS + localTopScorers[i - 1].avatar"
+                @error="localTopScorers[i - 1].avatar = constants.DEFAULT_TEAM_URL"
                 cover
               />
             </v-avatar>
@@ -22,7 +22,7 @@
           <template v-slot:append>
             <v-list-item-action>
               <v-btn variant="text" append-icon="mdi-soccer" size="small">
-                {{ topScorers[i - 1].stats.goals
+                {{ localTopScorers[i - 1].stats.goals
                 }}
               </v-btn>
             </v-list-item-action>
@@ -47,6 +47,7 @@ export default {
   },
   data() {
     return {
+      localTopScorers: JSON.parse(JSON.stringify(this.topScorers)),
       constants: constants
     }
   }

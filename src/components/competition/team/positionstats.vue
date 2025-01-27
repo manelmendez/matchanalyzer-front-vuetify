@@ -61,7 +61,7 @@ export default {
               text: 'Posición'
             },
             reverse: true,
-            max: 16,
+            max: 21,
             min: 1,
             ticks: {
               stepSize: 1
