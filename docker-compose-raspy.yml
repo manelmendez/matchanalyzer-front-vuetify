@@ -17,3 +17,4 @@ services:
       - ma_backend
 networks:
   ma_backend:
+    external: true
