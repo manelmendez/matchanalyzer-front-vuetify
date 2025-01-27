@@ -28,5 +28,5 @@ export default defineConfig({
       optionsSuccessStatus: 204,
     }
   },
-  base: './',
+  base: '/',
 })
