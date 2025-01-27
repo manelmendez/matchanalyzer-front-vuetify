@@ -11,11 +11,7 @@ WORKDIR /projects/matchanalyzer-front-vuetify
 COPY ./ ./
 
 # Install dependencies
-RUN npm install
-
-# Run server
-WORKDIR /projects/matchanalyzer-front-vuetify/
-
-RUN npm run build
+RUN npm install && npm run build
 # CMD [ "npm", "run", "build" ]
-COPY dist /var/www/html
+RUN mkdir -p /usr/share/nginx/html && chown -R node:node /usr/share/nginx/html
+RUN if [ -d dist ]; then cp -r dist /usr/share/nginx/html; else echo "no existe"; fi
