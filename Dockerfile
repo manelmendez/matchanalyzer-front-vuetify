@@ -1,11 +1,11 @@
-FROM node:23-alpine
+FROM node:23-alpine AS build
 
 # setting up MatchAnalyzer
 ARG environment
 RUN echo "environment: $environment"
 RUN apk add --no-cache g++ make python3
 # set work directory on Docker
-WORKDIR /projects/matchanalyzer-front-vuetify
+WORKDIR /app
 
 # Install dependencies
 # RUN npm install && npm run build
@@ -27,7 +27,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copia los archivos construidos al directorio de Nginx
-COPY --from=build /projects/matchanalyzer-front-vuetify/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Exponer el puerto 80
 EXPOSE 80

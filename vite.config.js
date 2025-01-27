@@ -2,12 +2,9 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { loadEnv } from 'vite'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-// import constants from '@/assets/constants/constants'
-const mode = process.env.NODE_ENV || 'development'
-const env = loadEnv(mode, process.cwd(), '')
+import constants from './src/assets/constants/constants'
 
 export default defineConfig({
   plugins: [
@@ -34,7 +31,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: env.VITE_LOCAL_API,
+        target: constants.API_ADDRESS,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
